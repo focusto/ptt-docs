@@ -26,22 +26,22 @@ PicToText provides powerful OCR (Optical Character Recognition) capabilities spe
 ## Quick Links
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
-  <a href="./quickstart" class="block p-6 border rounded-lg hover:bg-gray-50">
+  <a href="./quickstart.md" class="block p-6 border rounded-lg hover:bg-gray-50">
     <h3 class="text-lg font-semibold mb-2">🚀 Quickstart Guide</h3>
     <p class="text-gray-600">Get your first API call working in 5 minutes</p>
   </a>
 
-  <a href="./supported-documents" class="block p-6 border rounded-lg hover:bg-gray-50">
+  <a href="./supported-documents.md" class="block p-6 border rounded-lg hover:bg-gray-50">
     <h3 class="text-lg font-semibold mb-2">📚 API Reference</h3>
     <p class="text-gray-600">Complete endpoint documentation by region</p>
   </a>
 
-  <a href="./errors" class="block p-6 border rounded-lg hover:bg-gray-50">
+  <a href="./errors.md" class="block p-6 border rounded-lg hover:bg-gray-50">
     <h3 class="text-lg font-semibold mb-2">🔧 Error Reference</h3>
     <p class="text-gray-600">Error codes and troubleshooting guide</p>
   </a>
 
-  <a href="./limits" class="block p-6 border rounded-lg hover:bg-gray-50">
+  <a href="./limits.md" class="block p-6 border rounded-lg hover:bg-gray-50">
     <h3 class="text-lg font-semibold mb-2">📊 Rate Limits</h3>
     <p class="text-gray-600">Usage limits and quota information</p>
   </a>
@@ -73,14 +73,13 @@ PicToText provides powerful OCR (Optical Character Recognition) capabilities spe
 
 Browse API documentation by region:
 
-- **🌏 Asia**: [China](./reference/asia/china/id-card), [India](./reference/asia/india/aadhaar-front)
-- **🌎 North America**: [USA](./reference/north-america/usa/drivers-license)
+- **🌏 Asia**: [China](./reference/asia/china/id-card.md), [India](./reference/asia/india/aadhaar-front.md)
+- **🌎 North America**: [USA](./reference/north-america/usa/drivers-license.md)
 
-For a complete list, see the [Supported Documents](./supported-documents) page.
+For a complete list, see the [Supported Documents](./supported-documents.md) page.
 
 ## Need Help?
 
 - 📧 **Email:** support@pictotext.io
 - 💬 **Discord:** [Join our community](https://discord.gg/pictotext)
-- 📖 **FAQ:** [Frequently Asked Questions](/docs/faq)
 - 📝 **Blog:** [Latest updates and guides](/blog)

@@ -65,9 +65,9 @@ Extract data from Philippines Driver's License with high accuracy using our adva
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@ph_drivers_license.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@ph_drivers_license.jpg" \
   -F "documentType=ph_drivers_license"
 ```
 
@@ -193,7 +193,7 @@ processPHDriversLicense('./ph_drivers_license.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All Philippines Documents](../../../supported-documents#asia) - Other Philippine documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All Philippines Documents](../../../supported-documents.md#asia) - Other Philippine documents

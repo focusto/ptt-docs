@@ -65,9 +65,9 @@ Extract data from Colombian ID Card (Cédula de Ciudadanía) with high accuracy 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@colombia_id.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@colombia_id.jpg" \
   -F "documentType=co_id_card"
 ```
 
@@ -193,7 +193,7 @@ processColombiaIDCard('./colombia_id.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All Colombia Documents](../../../supported-documents#south-america) - Other Colombian documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All Colombia Documents](../../../supported-documents.md#south-america) - Other Colombian documents

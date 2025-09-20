@@ -121,9 +121,11 @@ response = requests.post('https://pictotext.io/api/v1/ocr',
     "code": 401,
     "message": "Invalid or inactive API key",
     "status": "Unauthorized",
-    "details": [{
-      "reason": "INVALID_API_KEY"
-    }]
+    "details": [
+      {
+        "reason": "INVALID_API_KEY"
+      }
+    ]
   }
 }
 ```
@@ -200,7 +202,6 @@ If authentication issues persist:
 
 ## Related Documentation
 
-- [Quickstart Guide](/docs/quickstart) - Getting started with API
-- [Error Reference](/docs/reference/errors) - Complete error codes
-- [Rate Limits](/docs/reference/limits) - Usage limits and quotas
-- [API Reference](/docs/api) - Endpoint documentation
+- [Quickstart Guide](/docs/quickstart.md) - Getting started with API
+- [Error Reference](/docs/reference/errors.md) - Complete error codes
+- [Rate Limits](/docs/reference/limits.md) - Usage limits and quotas

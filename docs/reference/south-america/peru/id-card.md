@@ -48,7 +48,7 @@ Extract data from Peruvian ID Card (DNI) with high accuracy using our advanced O
 ### Response Fields
 
 | Field | Type | Description | Example |
-|-------|------|-------------|---------|
+|-------|------|-------------|---------||
 | `cardNumber` | string | DNI number | 12345678 |
 | `dateOfBirth` | string | Date of birth (YYYY-MM-DD) | 1990-01-01 |
 | `foreNames` | string | Given names | JUAN CARLOS |
@@ -67,9 +67,9 @@ Extract data from Peruvian ID Card (DNI) with high accuracy using our advanced O
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@peru_id.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@peru_id.jpg" \
   -F "documentType=pe_id_card"
 ```
 
@@ -195,7 +195,7 @@ processPeruIDCard('./peru_id.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All Peru Documents](../../../supported-documents#south-america) - Other Peruvian documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All Peru Documents](../../../supported-documents.md#south-america) - Other Peruvian documents

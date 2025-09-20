@@ -183,7 +183,7 @@ processIDCard('./chinese_id.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All China Documents](../../../supported-documents#asia) - Other Chinese documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All China Documents](../../../supported-documents.md#asia) - Other Chinese documents

@@ -86,8 +86,8 @@ You've successfully extracted data from an ID card.
 
 ## Next Steps
 
-- 📋 [Browse supported documents](./supported-documents) - See what else you can extract
-- 📖 [Read the API reference](./supported-documents) - Complete endpoint documentation
+- 📋 [Browse supported documents](./supported-documents.md) - See what else you can extract
+- 📖 [Read the API reference](./supported-documents.md) - Complete endpoint documentation
 
 ## Common Issues
 

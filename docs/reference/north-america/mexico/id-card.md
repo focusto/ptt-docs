@@ -81,9 +81,9 @@ Extract data from Mexican ID Card (INE/IFE) with high accuracy using our advance
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@mexican_id.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@mexican_id.jpg" \
   -F "documentType=mx_id_card"
 ```
 
@@ -209,7 +209,7 @@ processMexicanIDCard('./mexican_id.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All Mexico Documents](../../../supported-documents#north-america) - Other Mexican documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All Mexico Documents](../../../supported-documents.md#north-america) - Other Mexican documents

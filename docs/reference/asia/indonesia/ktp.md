@@ -75,9 +75,9 @@ Extract data from Indonesian KTP (Identity Card) with high accuracy using our ad
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@ktp.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@ktp.jpg" \
   -F "documentType=id_ktp"
 ```
 
@@ -203,7 +203,7 @@ processKTP('./ktp.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All Indonesia Documents](../../../supported-documents#asia) - Other Indonesian documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All Indonesia Documents](../../../supported-documents.md#asia) - Other Indonesian documents

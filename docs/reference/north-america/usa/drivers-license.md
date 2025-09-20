@@ -63,9 +63,9 @@ Extract data from US Driver's License with high accuracy using our advanced OCR 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@us_drivers_license.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@us_drivers_license.jpg" \
   -F "documentType=us_drivers_license"
 ```
 
@@ -120,7 +120,7 @@ import requests
 import os
 
 def extract_us_license_data(image_path, api_key):
-    """Extract data from US driver's license image"""
+    """Extract data from US driver\'s license image"""
 
     url = 'https://pictotext.io/api/v1/ocr'
     headers = {'Authorization': f'Bearer {api_key}'}
@@ -191,7 +191,7 @@ processUSDriversLicense('./us_drivers_license.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All USA Documents](../../../supported-documents#north-america) - Other US documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All USA Documents](../../../supported-documents.md#north-america) - Other US documents

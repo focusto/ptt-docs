@@ -59,9 +59,9 @@ Extract data from Pakistan ID Card (CNIC - Computerized National Identity Card) 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@pakistan_id.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@pakistan_id.jpg" \
   -F "documentType=pk_id_card"
 ```
 
@@ -187,7 +187,7 @@ processPakistanIDCard('./pakistan_id.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All Pakistan Documents](../../../supported-documents#asia) - Other Pakistani documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All Pakistan Documents](../../../supported-documents.md#asia) - Other Pakistani documents

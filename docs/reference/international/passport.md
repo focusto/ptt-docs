@@ -61,9 +61,9 @@ Extract data from passports with high accuracy using our advanced OCR technology
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@passport.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@passport.jpg" \
   -F "documentType=passport"
 ```
 
@@ -189,7 +189,7 @@ processPassport('./passport.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../authentication) - API key management
-- [Error Reference](../../errors) - Complete error codes
-- [Rate Limits](../../limits) - Usage limits and quotas
-- [All International Documents](../../supported-documents#international) - Other international documents
+- [Authentication Guide](../../authentication.md) - API key management
+- [Error Reference](../../errors.md) - Complete error codes
+- [Rate Limits](../../limits.md) - Usage limits and quotas
+- [All International Documents](../../supported-documents.md#international) - Other international documents

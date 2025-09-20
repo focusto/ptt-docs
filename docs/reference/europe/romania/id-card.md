@@ -61,9 +61,9 @@ Extract data from Romanian ID Card (Carte de Identitate) with high accuracy usin
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \\
-  -H "Authorization: Bearer sk_live_123456789abcdef" \\
-  -F "image=@romania_id.jpg" \\
+curl -X POST "https://pictotext.io/api/v1/ocr" \
+  -H "Authorization: Bearer sk_live_123456789abcdef" \
+  -F "image=@romania_id.jpg" \
   -F "documentType=ro_id_card"
 ```
 
@@ -189,7 +189,7 @@ processRomaniaIDCard('./romania_id.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
-- [Authentication Guide](../../../authentication) - API key management
-- [Error Reference](../../../errors) - Complete error codes
-- [Rate Limits](../../../limits) - Usage limits and quotas
-- [All Romania Documents](../../../supported-documents#europe) - Other Romanian documents
+- [Authentication Guide](../../../authentication.md) - API key management
+- [Error Reference](../../../errors.md) - Complete error codes
+- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [All Romania Documents](../../../supported-documents.md#europe) - Other Romanian documents

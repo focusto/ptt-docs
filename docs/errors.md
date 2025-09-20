@@ -168,7 +168,7 @@ Service temporarily unavailable.
 | Reason Code | Description | Solution |
 |-------------|-------------|----------|
 | `MISSING_IMAGE_FILE` | No image file provided | Include image in form data |
-| `INVALID_DOCUMENT_TYPE` | Unsupported document type | Check [supported documents](/docs/supported-documents) |
+| `INVALID_DOCUMENT_TYPE` | Unsupported document type | Check [supported documents](/docs/supported-documents.md) |
 | `INVALID_IMAGE_FORMAT` | Unsupported image format | Use JPG, PNG, GIF, or WebP |
 | `IMAGE_TOO_LARGE` | Image exceeds 10MB limit | Resize or compress image |
 | `IMAGE_TOO_SMALL` | Image too small to process | Use higher resolution image |
@@ -335,7 +335,7 @@ async function handleRateLimit(response) {
 
 **Solutions:**
 1. Use exact document type string (case-sensitive)
-2. Check [supported documents](/docs/document-types) list
+2. Check [supported documents](/docs/supported-documents.md) list
 3. Avoid using "auto" for production
 4. Verify no typos in document type
 
@@ -376,7 +376,7 @@ async function handleRateLimit(response) {
 If you encounter persistent errors:
 
 1. **Check Status**: [Status page](https://status.pictotext.io)
-2. **Review Request**: Compare with [code examples](/docs/guides/code-examples)
+2. **Review Request**: Compare with code examples
 3. **Test in Dashboard**: Use web interface to isolate issues
 4. **Contact Support**: Include error details
 
@@ -387,7 +387,7 @@ If you encounter persistent errors:
 
 ## Related Documentation
 
-- [Authentication](./authentication) - API key management
-- [Rate Limits](./limits) - Usage limits and quotas
-- [Quickstart Guide](./quickstart) - Getting started
-- [Supported Documents](./supported-documents) - Complete list of supported document types
+- [Authentication](./authentication.md) - API key management
+- [Rate Limits](./limits.md) - Usage limits and quotas
+- [Quickstart Guide](./quickstart.md) - Getting started
+- [Supported Documents](./supported-documents.md) - Complete list of supported document types

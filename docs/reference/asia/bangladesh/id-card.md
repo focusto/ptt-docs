@@ -20,7 +20,7 @@ Extract data from Bangladesh ID Card with high accuracy using our advanced OCR t
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `bd_id_card` |
 
 
@@ -32,7 +32,10 @@ Extract data from Bangladesh ID Card with high accuracy using our advanced OCR t
 {
   "idNumber": "1234567890123",
   "name": "MD. RAHIM UDDIN",
-  "birthday": "1990-01-01"
+  "birthday": "1990-01-01",
+  "fatherName": "MD. KARIM UDDIN",
+  "motherName": "FATIMA BEGUM",
+  "address": "VILLAGE, POST, THANA, DISTRICT"
 }
 ```
 
@@ -43,15 +46,18 @@ Extract data from Bangladesh ID Card with high accuracy using our advanced OCR t
 | `idNumber` | string | National ID number | 1234567890123 |
 | `name` | string | Full name | MD. RAHIM UDDIN |
 | `birthday` | string | Date of birth (YYYY-MM-DD) | 1990-01-01 |
+| `fatherName` | string | Father's name | MD. KARIM UDDIN |
+| `motherName` | string | Mother's name | FATIMA BEGUM |
+| `address` | string | Full address | VILLAGE, POST, THANA, DISTRICT |
 
 ## Code Examples
 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@bangladesh_id.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@bangladesh_id.jpg" \\
   -F "documentType=bd_id_card"
 ```
 
@@ -179,5 +185,5 @@ processBangladeshIDCard('./bangladesh_id.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Bangladesh Documents](../../../supported-documents.md#asia) - Other Bangladeshi documents

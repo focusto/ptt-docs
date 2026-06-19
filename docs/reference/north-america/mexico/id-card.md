@@ -20,7 +20,7 @@ Extract data from Mexican ID Card (INE/IFE) with high accuracy using our advance
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `mx_id_card` |
 
 
@@ -36,8 +36,8 @@ Extract data from Mexican ID Card (INE/IFE) with high accuracy using our advance
   "name": "JUAN",
   "birthday": "1990-01-01",
   "gender": "Male",
-  "idNumber": "ABCDEFGHIJKLMNOP",
-  "voterId": "ABCD123456789012",
+  "curp": "PEGA900101HDFXXX01",
+  "electorKey": "PEGAJU90010109H100",
   "addressAll": "AVENIDA REFORMA 123, COLONIA CENTRO, CIUDAD DE MEXICO",
   "state": "CIUDAD DE MEXICO",
   "district": "DISTRITO FEDERAL",
@@ -62,8 +62,8 @@ Extract data from Mexican ID Card (INE/IFE) with high accuracy using our advance
 | `name` | string | First name | JUAN |
 | `birthday` | string | Date of birth (YYYY-MM-DD) | 1990-01-01 |
 | `gender` | string | Gender | Male |
-| `idNumber` | string | ID card number | ABCDEFGHIJKLMNOP |
-| `voterId` | string | Voter ID number | ABCD123456789012 |
+| `curp` | string | Clave Única de Registro de Población | PEGA900101HDFXXX01 |
+| `electorKey` | string | Clave de Elector | PEGAJU90010109H100 |
 | `addressAll` | string | Complete address | AVENIDA REFORMA 123, COLONIA CENTRO, CIUDAD DE MEXICO |
 | `state` | string | State name | CIUDAD DE MEXICO |
 | `district` | string | Electoral district | DISTRITO FEDERAL |
@@ -81,9 +81,9 @@ Extract data from Mexican ID Card (INE/IFE) with high accuracy using our advance
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@mexican_id.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@mexican_id.jpg" \\
   -F "documentType=mx_id_card"
 ```
 
@@ -211,5 +211,5 @@ processMexicanIDCard('./mexican_id.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Mexico Documents](../../../supported-documents.md#north-america) - Other Mexican documents

@@ -20,7 +20,7 @@ Extract data from US Driver's License with high accuracy using our advanced OCR 
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | Driver's license image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | Driver's license image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `us_drivers_license` |
 
 
@@ -39,7 +39,12 @@ Extract data from US Driver's License with high accuracy using our advanced OCR 
   "address": "123 MAIN STREET",
   "city": "LOS ANGELES",
   "state": "CA",
-  "zipCode": "90001"
+  "zipCode": "90001",
+  "gender": "M",
+  "height": "6'00\"",
+  "eyeColor": "BRO",
+  "vehicleClass": "C",
+  "restrictions": "NONE"
 }
 ```
 
@@ -57,15 +62,20 @@ Extract data from US Driver's License with high accuracy using our advanced OCR 
 | `city` | string | City name | LOS ANGELES |
 | `state` | string | State abbreviation | CA |
 | `zipCode` | string | ZIP code | 90001 |
+| `gender` | string | Gender (M/F) | M |
+| `height` | string | Height | 6'00" |
+| `eyeColor` | string | Eye color | BRO |
+| `vehicleClass` | string | Vehicle class | C |
+| `restrictions` | string | License restrictions | NONE |
 
 ## Code Examples
 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@us_drivers_license.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@us_drivers_license.jpg" \\
   -F "documentType=us_drivers_license"
 ```
 
@@ -120,7 +130,7 @@ import requests
 import os
 
 def extract_us_license_data(image_path, api_key):
-    """Extract data from US driver\'s license image"""
+    """Extract data from US driver's license image"""
 
     url = 'https://pictotext.io/api/v1/ocr'
     headers = {'Authorization': f'Bearer {api_key}'}
@@ -193,5 +203,5 @@ processUSDriversLicense('./us_drivers_license.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All USA Documents](../../../supported-documents.md#north-america) - Other US documents

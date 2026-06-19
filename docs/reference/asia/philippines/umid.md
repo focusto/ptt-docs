@@ -20,7 +20,7 @@ Extract data from Philippines UMID (Unified Multi-Purpose ID) with high accuracy
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | UMID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | UMID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `ph_umid` |
 
 
@@ -57,9 +57,9 @@ Extract data from Philippines UMID (Unified Multi-Purpose ID) with high accuracy
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@ph_umid.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@ph_umid.jpg" \\
   -F "documentType=ph_umid"
 ```
 
@@ -187,5 +187,5 @@ processPHUMID('./ph_umid.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Philippines Documents](../../../supported-documents.md#asia) - Other Philippine documents

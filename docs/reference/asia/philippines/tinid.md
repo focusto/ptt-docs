@@ -20,7 +20,7 @@ Extract data from Philippines TinID (Tax Identification Number ID) with high acc
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | TinID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | TinID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `ph_tinid` |
 
 
@@ -53,9 +53,9 @@ Extract data from Philippines TinID (Tax Identification Number ID) with high acc
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@ph_tinid.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@ph_tinid.jpg" \\
   -F "documentType=ph_tinid"
 ```
 
@@ -183,5 +183,5 @@ processPHTinID('./ph_tinid.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Philippines Documents](../../../supported-documents.md#asia) - Other Philippine documents

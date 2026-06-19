@@ -20,7 +20,7 @@ Extract data from Thai ID Card with high accuracy using our advanced OCR technol
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `th_id_card` |
 
 
@@ -73,9 +73,9 @@ Extract data from Thai ID Card with high accuracy using our advanced OCR technol
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@thai_id.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@thai_id.jpg" \\
   -F "documentType=th_id_card"
 ```
 
@@ -202,5 +202,5 @@ processThaiIDCard('./thai_id.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Thailand Documents](../../../supported-documents.md#asia) - Other Thai documents

@@ -42,6 +42,8 @@ curl -X POST "https://pictotext.io/api/v1/ocr" \
 
 ## Request Format
 
+All OCR requests must be sent as `multipart/form-data`.
+
 ### HTTP Header
 ```http
 Authorization: Bearer sk_live_123456789abcdef
@@ -57,11 +59,14 @@ curl -X POST "https://pictotext.io/api/v1/ocr" \
 
 ### JavaScript Example
 ```javascript
+const formData = new FormData();
+formData.append('image', fileInput.files[0]);
+formData.append('documentType', 'cn_id_card');
+
 const response = await fetch('https://pictotext.io/api/v1/ocr', {
   method: 'POST',
   headers: {
-    'Authorization': 'Bearer sk_live_123456789abcdef',
-    'Content-Type': 'multipart/form-data'
+    'Authorization': 'Bearer sk_live_123456789abcdef'
   },
   body: formData
 });
@@ -69,17 +74,44 @@ const response = await fetch('https://pictotext.io/api/v1/ocr', {
 
 ### Python Example
 ```python
+import os
 import requests
 
 headers = {
     'Authorization': 'Bearer sk_live_123456789abcdef'
 }
 
-response = requests.post('https://pictotext.io/api/v1/ocr',
-                        headers=headers,
-                        files=files,
-                        data=data)
+with open('document.jpg', 'rb') as f:
+    files = {
+        'image': (os.path.basename('document.jpg'), f, 'image/jpeg')
+    }
+    data = {
+        'documentType': 'cn_id_card'
+    }
+
+    response = requests.post(
+        'https://pictotext.io/api/v1/ocr',
+        headers=headers,
+        files=files,
+        data=data
+    )
 ```
+
+### Supported Image MIME Types
+
+- `image/jpeg`
+- `image/jpg`
+- `image/png`
+- `image/webp`
+- `image/heic`
+- `image/heif`
+
+### Upload Rules
+
+- Send the image in the `image` form field as a real file part
+- Do not send the image via `data=...` as plain text
+- Do not manually set the `multipart/form-data` `Content-Type` header; let your HTTP client add the boundary automatically
+- If you preprocess an image in memory, re-encode it as JPEG, PNG, WebP, HEIC, or HEIF before uploading
 
 ## Security Best Practices
 
@@ -110,8 +142,8 @@ response = requests.post('https://pictotext.io/api/v1/ocr',
 |-------------|------------|-------------|----------|
 | 401 | `INVALID_AUTH_HEADER` | Missing or malformed Authorization header | Use format: `Bearer YOUR_API_KEY` |
 | 401 | `INVALID_API_KEY` | API key not found or inactive | Check key in dashboard |
-| 401 | `API_KEY_DISABLED` | API key has been disabled | Contact support |
-| 403 | `SUBSCRIPTION_REQUIRED` | Active subscription needed | Upgrade to paid plan |
+| 403 | `EMAIL_NOT_VERIFIED` | The account email must be verified before the API can be used | Verify your email address and retry |
+| 402 | `INSUFFICIENT_CREDITS` | The account has no included quota or remaining API credit | Purchase credits or upgrade your plan |
 
 ### Error Response Format
 
@@ -121,11 +153,9 @@ response = requests.post('https://pictotext.io/api/v1/ocr',
     "code": 401,
     "message": "Invalid or inactive API key",
     "status": "Unauthorized",
-    "details": [
-      {
-        "reason": "INVALID_API_KEY"
-      }
-    ]
+    "details": [{
+      "reason": "INVALID_API_KEY"
+    }]
   }
 }
 ```
@@ -191,6 +221,12 @@ async function testApiKey(apiKey) {
 - Verify account email is verified
 - Ensure no outstanding payments
 
+**"Invalid Image Type"**
+- Ensure the uploaded `image` part uses one of the supported MIME types
+- Open files in binary mode (`rb`)
+- If using Python `requests`, pass the file via `files=...` and include the MIME type explicitly when possible
+- Do not send base64 text, file paths, or plain strings as the `image` field
+
 ### Support Contact
 
 If authentication issues persist:
@@ -202,6 +238,7 @@ If authentication issues persist:
 
 ## Related Documentation
 
-- [Quickstart Guide](/docs/quickstart.md) - Getting started with API
-- [Error Reference](/docs/reference/errors.md) - Complete error codes
-- [Rate Limits](/docs/reference/limits.md) - Usage limits and quotas
+- [Quickstart Guide](https://pictotext.io/docs/quickstart) - Getting started with API
+- [Error Reference](./errors.md) - Complete error codes
+- [Usage and Limits](./limits.md) - Usage limits and quotas
+- [API Reference](./supported-documents.md) - Endpoint documentation

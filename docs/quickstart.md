@@ -5,6 +5,49 @@ category: "guide"
 language: "en"
 order: 1
 showInSidebar: true
+codeExamples:
+  - title: 'Send your first request'
+    language: curl
+    code: |
+      curl -X POST "https://pictotext.io/api/v1/ocr" \
+        -H "Authorization: Bearer YOUR_API_KEY" \
+        -F "image=@document.jpg" \
+        -F "documentType=cn_id_card"
+  - title: 'Send your first request'
+    language: javascript
+    code: |
+      const formData = new FormData()
+      formData.append('image', fileInput.files[0])
+      formData.append('documentType', 'cn_id_card')
+
+      const response = await fetch('https://pictotext.io/api/v1/ocr', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer YOUR_API_KEY',
+        },
+        body: formData,
+      })
+
+      const data = await response.json()
+      console.log(data)
+  - title: 'Send your first request'
+    language: python
+    code: |
+      import os
+      import requests
+
+      url = 'https://pictotext.io/api/v1/ocr'
+      headers = {'Authorization': 'Bearer YOUR_API_KEY'}
+
+      with open('document.jpg', 'rb') as f:
+          files = {
+              'image': (os.path.basename('document.jpg'), f, 'image/jpeg')
+          }
+          data = {'documentType': 'cn_id_card'}
+
+          response = requests.post(url, headers=headers, files=files, data=data)
+          result = response.json()
+          print(result)
 ---
 
 # Quickstart
@@ -20,50 +63,18 @@ Get your first OCR API call working in under 5 minutes.
 
 ## Step 2: Make Your First Request
 
-### Using cURL
+### Send your first request
 
-```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -F "image=@document.jpg" \
-  -F "documentType=cn_id_card"
-```
+Pick your preferred stack below and run the sample request. Replace `YOUR_API_KEY` with the key you generated in step 1.
 
-### Using JavaScript
+The API expects `multipart/form-data` uploads. Send the image as a real file part in the `image` field and use one of these MIME types:
 
-```javascript
-const formData = new FormData();
-formData.append('image', fileInput.files[0]);
-formData.append('documentType', 'cn_id_card');
-
-const response = await fetch('https://pictotext.io/api/v1/ocr', {
-  method: 'POST',
-  headers: {
-    'Authorization': 'Bearer YOUR_API_KEY'
-  },
-  body: formData
-});
-
-const data = await response.json();
-console.log(data);
-```
-
-### Using Python
-
-```python
-import requests
-
-url = 'https://pictotext.io/api/v1/ocr'
-headers = {'Authorization': 'Bearer YOUR_API_KEY'}
-
-with open('document.jpg', 'rb') as f:
-    files = {'image': f}
-    data = {'documentType': 'cn_id_card'}
-
-    response = requests.post(url, headers=headers, files=files, data=data)
-    result = response.json()
-    print(result)
-```
+- `image/jpeg`
+- `image/jpg`
+- `image/png`
+- `image/webp`
+- `image/heic`
+- `image/heif`
 
 ## Step 3: Understand the Response
 
@@ -95,6 +106,8 @@ You've successfully extracted data from an ID card.
 
 **400 Invalid Document Type**: Use a valid type like `cn_id_card`, not `auto`
 
-**Image Upload Failed**: Ensure your image is JPG, PNG, GIF, or WebP format
+**400 Invalid Image Type**: Ensure the `image` field is uploaded as a multipart file with one of these MIME types: `image/jpeg`, `image/jpg`, `image/png`, `image/webp`, `image/heic`, or `image/heif`
+
+**Image Upload Failed**: Ensure your image is JPG, PNG, WebP, HEIC, or HEIF format, and do not send the image as plain text or a base64 string in the `image` field
 
 Need help? Contact support@pictotext.io

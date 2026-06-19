@@ -20,7 +20,7 @@ Extract data from Philippines Driver's License with high accuracy using our adva
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | Driver's license image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | Driver's license image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `ph_drivers_license` |
 
 
@@ -65,9 +65,9 @@ Extract data from Philippines Driver's License with high accuracy using our adva
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@ph_drivers_license.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@ph_drivers_license.jpg" \\
   -F "documentType=ph_drivers_license"
 ```
 
@@ -195,5 +195,5 @@ processPHDriversLicense('./ph_drivers_license.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Philippines Documents](../../../supported-documents.md#asia) - Other Philippine documents

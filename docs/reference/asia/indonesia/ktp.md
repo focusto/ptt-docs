@@ -20,7 +20,7 @@ Extract data from Indonesian KTP (Identity Card) with high accuracy using our ad
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | KTP card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | KTP card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `id_ktp` |
 
 
@@ -75,9 +75,9 @@ Extract data from Indonesian KTP (Identity Card) with high accuracy using our ad
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@ktp.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@ktp.jpg" \\
   -F "documentType=id_ktp"
 ```
 
@@ -205,5 +205,5 @@ processKTP('./ktp.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Indonesia Documents](../../../supported-documents.md#asia) - Other Indonesian documents

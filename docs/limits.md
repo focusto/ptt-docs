@@ -1,5 +1,5 @@
 ---
-title: "API Usage & Limits"
+title: "Usage & Limits"
 description: "API access, usage limits, and billing models for different plans."
 category: "guide"
 language: "en"
@@ -7,35 +7,56 @@ order: 4
 showInSidebar: true
 ---
 
-# API Usage & Limits
+# Usage & Limits
 
 This document explains the API access rights, usage limits, and billing models for our different plans.
 
 ## Plan Breakdown
 
+### Base Plans (Subscriptions)
+
 | Feature | Free Plan | Premium Plan | Enterprise Plan |
 | :--- | :--- | :--- | :--- |
-| **Monthly Fee** | $0 | $30 | **$49.90** |
-| **API Access** | ❌ No | ✅ Yes | ✅ Yes |
-| **Included Calls/Month** | 0 | 10,000 | **20,000** |
-| **After Limit is Reached** | N/A | Service Paused | **Purchase Credit Packs** |
-| **Overage Unit Price** | N/A | N/A | **Tiered Pricing** |
+| **Monthly Fee** | $0 | $29.9 | **$249** |
+| **Monthly Included Calls** | 0 | 10,000 | **100,000** |
+| **API Access** | ✅ With credits only | ✅ Included quota + credits | ✅ Included quota + credits |
 
-### Free Plan
-The Free plan does **not** include API access. To use the API, please upgrade to a paid plan.
+#### Free Plan
+- **Model**: No monthly fee, pay-as-you-go only.
+- **Included Quota**: No included monthly API calls.
+- **Access**: You can purchase small credit packs (see below) and use the API as long as you have remaining credits.
 
-### Premium Plan
+#### Premium Plan
 - **Model**: Subscription-based with a fixed monthly quota.
-- **Access**: Your active subscription grants you **10,000** API calls per month.
-- **Limit**: If you exhaust your 10,000 calls, API access will be paused until your quota resets on your next billing date.
+- **Included Quota**: An active Premium subscription grants you **10,000** API calls per month.
+- **Overage**: After 10,000 calls in a billing month, additional usage requires credits from purchased credit packs.
 
-### Enterprise Plan
-- **Model**: A hybrid model with a base subscription fee and pay-as-you-go for additional usage.
-- **Base Subscription**: The **$49.90/month** fee includes **20,000** API calls.
-- **Overage**: If you exceed the 20,000 included calls, you can purchase additional **Credit Packs** on-demand. These credits do not expire.
-- **Credit Pack Pricing**: The price per credit becomes cheaper as you buy larger packs (volume discount). For example:
-    - **1 - 9,999 Credits**: $0.004 / credit
-    - **10,000 - 99,999 Credits**: $0.0025 / credit
-    - **100,000+ Credits**: Contact us for custom pricing.
+#### Enterprise Plan
+- **Model**: Subscription with a large included quota plus pay-as-you-go for additional usage.
+- **Included Quota**: The **$249/month** Enterprise plan includes **100,000** API calls.
+- **Overage**: After 100,000 calls in a billing month, additional usage is billed against your credit balance.
 
-This structure provides a clear path for scaling your usage. Start with the cost-effective Premium plan and move to the flexible, high-volume Enterprise plan as your needs grow.
+### Credit Packs (Add-On Usage)
+
+Credit packs let you prepay for additional API calls. One credit equals one API call on the OCR API. Credits do **not** reset monthly and are consumed only when your included monthly quota (if any) has been used.
+
+| Pack Size (Calls) | Price  | Approx. Unit Price | Eligible Plans |
+| :--- | :--- | :--- | :--- |
+| **1,000** | $3.99  | ~$0.00399 / call | Free, Premium, Enterprise |
+| **3,000** | $9.99  | ~$0.00333 / call | Free, Premium, Enterprise |
+| **10,000** | $29.9  | ~$0.00299 / call | Premium, Enterprise |
+| **50,000** | $134.9 | ~$0.00270 / call | Premium, Enterprise |
+| **100,000** | $249  | ~$0.00249 / call | Enterprise only |
+
+**How usage is billed**
+
+1. Each API call increments your **monthly usage counter**.
+2. If you have an active subscription (Premium or Enterprise) and have not exhausted your monthly included quota, the call is counted against that quota.
+3. Once the monthly quota is used (or if you have no subscription), calls are deducted from your **credit balance**.
+4. If you have neither remaining quota nor sufficient credits, API requests will be rejected with an `INSUFFICIENT_CREDITS` error and you will need to purchase more credits or upgrade your plan.
+
+This structure provides a clear path for different usage levels:
+
+- Free users can pay-as-they-go with small packs for occasional usage.
+- Premium subscribers get an affordable monthly quota with the option to top up via 10k/50k packs.
+- Enterprise customers benefit from a large included quota plus access to high-volume packs with the lowest unit price.

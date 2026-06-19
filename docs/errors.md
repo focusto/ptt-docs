@@ -9,11 +9,11 @@ showInSidebar: true
 
 # Error Reference
 
-Complete reference for handling PicToText API errors with detailed error codes, troubleshooting steps, and best practices.
+Complete reference for handling PicToText API errors with the error codes currently returned by the live OCR endpoints.
 
 ## Error Format
 
-All errors follow a consistent JSON structure:
+OCR API errors generally follow this JSON structure:
 
 ```json
 {
@@ -47,9 +47,15 @@ Invalid request parameters or missing required fields.
 {
   "error": {
     "code": 400,
-    "message": "Image file is required in form data.",
+    "message": "Unsupported image MIME type: text/plain. Supported types: image/jpeg, image/jpg, image/png, image/webp, image/heic, image/heif.",
     "status": "Bad Request",
-    "details": [{ "reason": "MISSING_IMAGE_FILE" }]
+    "details": [{
+      "reason": "INVALID_IMAGE_TYPE",
+      "metadata": {
+        "received": "text/plain",
+        "supported": ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/heic", "image/heif"]
+      }
+    }]
   }
 }
 ```
@@ -76,14 +82,14 @@ Authentication failed.
 ```
 
 ### 402 Payment Required
-Insufficient credits for enterprise users.
+Insufficient credits when no included quota is available.
 
 **Example:**
 ```json
 {
   "error": {
     "code": 402,
-    "message": "Insufficient credits. Please top up your account.",
+    "message": "You have no remaining included quota or credits. Please purchase credits or upgrade your plan to continue.",
     "status": "Payment Required",
     "details": [{ "reason": "INSUFFICIENT_CREDITS" }]
   }
@@ -91,22 +97,19 @@ Insufficient credits for enterprise users.
 ```
 
 ### 403 Forbidden
-Access denied due to subscription or account issues.
+Access denied due to verification or access control requirements.
 
 **Common Causes:**
-- Inactive subscription
-- API key disabled
-- Account suspended
-- Regional restrictions
+- Email verification required
 
 **Example:**
 ```json
 {
   "error": {
     "code": 403,
-    "message": "A subscription is required to use this API key.",
+    "message": "Email verification required before using the API.",
     "status": "Forbidden",
-    "details": [{ "reason": "SUBSCRIPTION_REQUIRED" }]
+    "details": [{ "reason": "EMAIL_NOT_VERIFIED" }]
   }
 }
 ```
@@ -132,26 +135,6 @@ Server-side processing error.
 }
 ```
 
-### 503 Service Unavailable
-Service temporarily unavailable.
-
-**Common Causes:**
-- Maintenance window
-- High load
-- Infrastructure issues
-
-**Example:**
-```json
-{
-  "error": {
-    "code": 503,
-    "message": "Service temporarily unavailable. Please try again later.",
-    "status": "Service Unavailable",
-    "details": [{ "reason": "SERVICE_UNAVAILABLE" }]
-  }
-}
-```
-
 ## Error Codes Reference
 
 ### Authentication Errors
@@ -160,47 +143,29 @@ Service temporarily unavailable.
 |-------------|-------------|----------|
 | `INVALID_AUTH_HEADER` | Missing or malformed Authorization header | Use format: `Bearer YOUR_API_KEY` |
 | `INVALID_API_KEY` | API key not found or inactive | Check key in dashboard |
-| `SUBSCRIPTION_REQUIRED` | Active subscription needed | Upgrade to paid plan |
-| `ACCOUNT_SUSPENDED` | Account access restricted | Contact support |
+| `EMAIL_NOT_VERIFIED` | Email verification is required before using the OCR API | Verify your account email, then retry |
 
 ### Request Errors
 
 | Reason Code | Description | Solution |
 |-------------|-------------|----------|
 | `MISSING_IMAGE_FILE` | No image file provided | Include image in form data |
-| `INVALID_DOCUMENT_TYPE` | Unsupported document type | Check [supported documents](/docs/supported-documents.md) |
-| `INVALID_IMAGE_FORMAT` | Unsupported image format | Use JPG, PNG, GIF, or WebP |
+| `INVALID_DOCUMENT_TYPE` | Unsupported or missing document type | Check [supported documents](https://pictotext.io/docs/supported-documents) |
+| `INVALID_IMAGE_TYPE` | Uploaded file MIME type is not supported | Use `multipart/form-data` and one of: `image/jpeg`, `image/jpg`, `image/png`, `image/webp`, `image/heic`, `image/heif` |
 | `IMAGE_TOO_LARGE` | Image exceeds 10MB limit | Resize or compress image |
-| `IMAGE_TOO_SMALL` | Image too small to process | Use higher resolution image |
-| `IMAGE_CORRUPTED` | Image file is corrupted | Re-upload the image |
-| `INVALID_JSON` | Malformed JSON in request | Check request format |
 
 ### Processing Errors
 
 | Reason Code | Description | Solution |
 |-------------|-------------|----------|
 | `AI_SERVICE_ERROR` | AI processing failed | Retry request, contact support if persists |
-| `IMAGE_PROCESSING_ERROR` | Cannot analyze image | Check image quality |
-| `TEXT_EXTRACTION_FAILED` | Cannot extract text | Ensure document is clear |
-| `STRUCTURED_DATA_ERROR` | Cannot parse document structure | Verify document type |
-| `DOCUMENT_RECOGNITION_FAILED` | Cannot identify document type | Use specific document type |
-| `LOW_CONFIDENCE_RESULT` | Low confidence in extracted data | Check image quality |
+| `INTERNAL_ERROR` | An unhandled server error occurred before the OCR endpoint could return a normal result | Retry the request. If it persists, contact support |
 
-### Account Errors
+### Account & Plan Errors
 
 | Reason Code | Description | Solution |
 |-------------|-------------|----------|
-| `INSUFFICIENT_CREDITS` | Enterprise user out of credits | Purchase more credits |
-| `BILLING_ISSUE` | Payment method issue | Update payment method |
-
-### System Errors
-
-| Reason Code | Description | Solution |
-|-------------|-------------|----------|
-| `DATABASE_ERROR` | Database operation failed | Retry, contact support if persists |
-| `EXTERNAL_SERVICE_ERROR` | Dependent service failure | Retry, check status page |
-| `MAINTENANCE_MODE` | System under maintenance | Check status page for ETA |
-| `CONFIGURATION_ERROR` | System configuration issue | Contact support |
+| `INSUFFICIENT_CREDITS` | No remaining included quota or credits for the account | Purchase more credits or upgrade your plan |
 
 ## Error Handling Best Practices
 
@@ -247,13 +212,14 @@ async function callOcrApi(formData, maxRetries = 3) {
 function getUserFriendlyError(apiError) {
   const errorMap = {
     'INVALID_API_KEY': 'Please check your API key and try again.',
-    'SUBSCRIPTION_REQUIRED': 'A paid subscription is required. Please upgrade your account.',
+    'EMAIL_NOT_VERIFIED': 'Please verify your email address before using the API.',
     'MISSING_IMAGE_FILE': 'Please select an image file to upload.',
     'INVALID_DOCUMENT_TYPE': 'Please select a valid document type.',
+    'INVALID_IMAGE_TYPE': 'Please upload a supported image file and ensure the request uses the correct image MIME type.',
     'AI_SERVICE_ERROR': 'Processing failed. Please try again or contact support.',
     'INSUFFICIENT_CREDITS': 'You have run out of credits. Please top up your account.',
-    'RATE_LIMIT_EXCEEDED': 'Too many requests. Please wait a moment and try again.',
-    'IMAGE_TOO_LARGE': 'Image is too large. Please use a smaller file (max 10MB).'
+    'IMAGE_TOO_LARGE': 'Image is too large. Please use a smaller file (max 10MB).',
+    'INTERNAL_ERROR': 'An internal server error occurred. Please try again later.'
   };
 
   const reason = apiError.error.details?.[0]?.reason;
@@ -285,26 +251,6 @@ function logApiError(error, context = {}) {
 }
 ```
 
-### 4. Rate Limit Handling
-
-```javascript
-async function handleRateLimit(response) {
-  const remaining = response.headers.get('X-RateLimit-Remaining');
-  const reset = response.headers.get('X-RateLimit-Reset');
-
-  if (remaining && parseInt(remaining) < 5) {
-    console.warn(`Rate limit warning: ${remaining} requests remaining`);
-  }
-
-  if (response.status === 429) {
-    const resetTime = new Date(parseInt(reset) * 1000);
-    const waitTime = resetTime - new Date();
-
-    throw new Error(`Rate limit exceeded. Try again at ${resetTime.toLocaleTimeString()}`);
-  }
-}
-```
-
 ## Common Issues & Solutions
 
 ### "Invalid API Key" Error
@@ -327,7 +273,15 @@ async function handleRateLimit(response) {
 2. Check image quality and clarity
 3. Verify document type selection
 4. Contact support if persistent
-5. Check [status page](https://status.pictotext.io)
+
+### "Insufficient Credits" Error
+
+**Problem**: Getting 402 Payment Required with INSUFFICIENT_CREDITS
+
+**Solutions:**
+1. Purchase additional credits
+2. Upgrade to a plan with included quota
+3. Verify that your account still has available API credit
 
 ### "Invalid Document Type" Error
 
@@ -335,20 +289,37 @@ async function handleRateLimit(response) {
 
 **Solutions:**
 1. Use exact document type string (case-sensitive)
-2. Check [supported documents](/docs/supported-documents.md) list
+2. Check [supported documents](./supported-documents.md) list
 3. Avoid using "auto" for production
 4. Verify no typos in document type
 
-### Rate Limit Issues
+### "Invalid Image Type" Error
 
-**Problem**: Getting 429 Too Many Requests
+**Problem**: Getting 400 Bad Request with INVALID_IMAGE_TYPE
 
 **Solutions:**
-1. Check rate limit headers in responses
-2. Implement request queuing
-3. Upgrade to higher plan
-4. Contact support for custom limits
-5. Implement exponential backoff
+1. Send the request as `multipart/form-data`
+2. Upload the image in the `image` field as a real file part
+3. Use one of these MIME types: `image/jpeg`, `image/jpg`, `image/png`, `image/webp`, `image/heic`, `image/heif`
+4. Do not send base64 text, file paths, or plain strings as the `image` field
+5. If using Python, open the file in binary mode and pass it via `files=...`
+
+### "Image Too Large" Error
+
+**Problem**: Getting 400 Bad Request with IMAGE_TOO_LARGE
+
+**Solutions:**
+1. Keep the upload at or below 10MB
+2. Resize or compress the image before uploading
+3. If possible, crop large empty regions before sending the file
+
+### "Email Not Verified" Error
+
+**Problem**: Getting 403 Forbidden with EMAIL_NOT_VERIFIED
+
+**Solutions:**
+1. Verify the email address on the account that owns the API key
+2. Retry the request after verification is complete
 
 ### Image Quality Issues
 
@@ -375,10 +346,9 @@ async function handleRateLimit(response) {
 
 If you encounter persistent errors:
 
-1. **Check Status**: [Status page](https://status.pictotext.io)
-2. **Review Request**: Compare with code examples
-3. **Test in Dashboard**: Use web interface to isolate issues
-4. **Contact Support**: Include error details
+1. **Review Request**: Compare with [code examples](./quickstart.md)
+2. **Test in Dashboard**: Use web interface to isolate issues
+3. **Contact Support**: Include error details
 
 **Support Contact:**
 - Email: support@pictotext.io
@@ -388,6 +358,6 @@ If you encounter persistent errors:
 ## Related Documentation
 
 - [Authentication](./authentication.md) - API key management
-- [Rate Limits](./limits.md) - Usage limits and quotas
+- [Usage and Limits](./limits.md) - Usage limits and quotas
 - [Quickstart Guide](./quickstart.md) - Getting started
 - [Supported Documents](./supported-documents.md) - Complete list of supported document types

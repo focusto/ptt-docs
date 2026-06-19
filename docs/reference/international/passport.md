@@ -12,7 +12,7 @@ showInSidebar: true
 
 # Passport
 
-Extract data from passports with high accuracy using our advanced OCR technology.
+Extract data from passports with high accuracy using our advanced OCR technology. See the [passport OCR API product page](https://pictotext.io/products/passport-ocr) for use cases, MRZ background, and pricing.
 
 ## Request Parameters
 
@@ -20,7 +20,7 @@ Extract data from passports with high accuracy using our advanced OCR technology
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | Passport image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | Passport image file (JPG, PNG, WebP, HEIC and HEIF max 10MB) |
 | `documentType` | String | ✅ | Must be `passport` |
 
 
@@ -38,7 +38,8 @@ Extract data from passports with high accuracy using our advanced OCR technology
   "issueDay": "2020-01-01",
   "expiryDay": "2030-01-01",
   "issuePlace": "WASHINGTON D.C.",
-  "nationality": "UNITED STATES OF AMERICA"
+  "nationality": "UNITED STATES OF AMERICA",
+  "mrz": "P<USADOE<<JOHN<MICHAEL<<<<<<<<<<<<<<<<<<<<<\n1234567890USA9001011M3001012<<<<<<<<<<<<<<08"
 }
 ```
 
@@ -55,15 +56,16 @@ Extract data from passports with high accuracy using our advanced OCR technology
 | `expiryDay` | string | Expiry date (YYYY-MM-DD) | 2030-01-01 |
 | `issuePlace` | string | Place of issue | WASHINGTON D.C. |
 | `nationality` | string | Nationality | UNITED STATES OF AMERICA |
+| `mrz` | string | Machine Readable Zone. Preserve line breaks as `\n` exactly as printed. | P<USADOE<<JOHN...`\n`1234567890USA... |
 
 ## Code Examples
 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@passport.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@passport.jpg" \\
   -F "documentType=passport"
 ```
 
@@ -189,7 +191,9 @@ processPassport('./passport.jpg', 'YOUR_API_KEY')
 
 ## Related Documentation
 
+- [Passport OCR API overview](https://pictotext.io/products/passport-ocr) - Product page with use cases, code samples, and FAQ
+- [MRZ & ICAO 9303 deep dive](https://pictotext.io/blog/mrz-icao-9303-how-passport-ocr-works) - How MRZ parsing actually works
 - [Authentication Guide](../../authentication.md) - API key management
 - [Error Reference](../../errors.md) - Complete error codes
-- [Rate Limits](../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../limits.md) - Usage limits and quotas
 - [All International Documents](../../supported-documents.md#international) - Other international documents

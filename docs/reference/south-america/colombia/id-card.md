@@ -20,7 +20,7 @@ Extract data from Colombian ID Card (Cédula de Ciudadanía) with high accuracy 
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `co_id_card` |
 
 
@@ -65,9 +65,9 @@ Extract data from Colombian ID Card (Cédula de Ciudadanía) with high accuracy 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@colombia_id.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@colombia_id.jpg" \\
   -F "documentType=co_id_card"
 ```
 
@@ -195,5 +195,5 @@ processColombiaIDCard('./colombia_id.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Colombia Documents](../../../supported-documents.md#south-america) - Other Colombian documents

@@ -20,7 +20,7 @@ Extract data from Romanian ID Card (Carte de Identitate) with high accuracy usin
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `ro_id_card` |
 
 
@@ -32,13 +32,17 @@ Extract data from Romanian ID Card (Carte de Identitate) with high accuracy usin
 {
   "series": "AX",
   "idNumber": "123456",
+  "cnp": "1960101223344",
   "lastName": "POPESCU",
   "firstName": "ION",
+  "sex": "M",
   "nationality": "ROMANIAN",
   "placeOfBirth": "BUCURESTI",
   "address": "STRADA PRINCIPALA NR. 123",
   "issuedBy": "DIRECTIA GENERALA DE PASAPOARTE BUCURESTI",
-  "validity": "2030-01-01"
+  "validityStart": "2020-01-01",
+  "validityEnd": "2030-01-01",
+  "mrz": "IDROUAX123456<<<<<<<<<<<<<<<<<<\nPOPESCU<<ION<<<<<<<<<<<<<<<<<<<<<"
 }
 ```
 
@@ -48,22 +52,26 @@ Extract data from Romanian ID Card (Carte de Identitate) with high accuracy usin
 |-------|------|-------------|---------|
 | `series` | string | ID card series | AX |
 | `idNumber` | string | ID card number | 123456 |
+| `cnp` | string | Personal numerical code (CNP) | 1960101223344 |
 | `lastName` | string | Last name | POPESCU |
 | `firstName` | string | First name | ION |
+| `sex` | string | Sex as printed on card | M |
 | `nationality` | string | Nationality | ROMANIAN |
 | `placeOfBirth` | string | Place of birth | BUCURESTI |
 | `address` | string | Complete address | STRADA PRINCIPALA NR. 123 |
 | `issuedBy` | string | Issuing authority | DIRECTIA GENERALA DE PASAPOARTE BUCURESTI |
-| `validity` | string | Expiry date (YYYY-MM-DD) | 2030-01-01 |
+| `validityStart` | string | Start date (YYYY-MM-DD) | 2020-01-01 |
+| `validityEnd` | string | Expiry date (YYYY-MM-DD) | 2030-01-01 |
+| `mrz` | string | Machine Readable Zone. Preserve line breaks as `\n` exactly as printed. | IDROUAX123456...`\n`POPESCU<<ION... |
 
 ## Code Examples
 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@romania_id.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@romania_id.jpg" \\
   -F "documentType=ro_id_card"
 ```
 
@@ -191,5 +199,5 @@ processRomaniaIDCard('./romania_id.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Romania Documents](../../../supported-documents.md#europe) - Other Romanian documents

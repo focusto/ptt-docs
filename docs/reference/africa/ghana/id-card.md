@@ -20,7 +20,7 @@ Extract data from Ghana ID Card (Ghana Card) with high accuracy using our advanc
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `gh_id_card` |
 
 
@@ -39,7 +39,8 @@ Extract data from Ghana ID Card (Ghana Card) with high accuracy using our advanc
   "nationality": "GHANAIAN",
   "personalId": "1234567890",
   "placeOfIssue": "ACCRA",
-  "surname": "MENSAH"
+  "surname": "MENSAH",
+  "mrz": "IDGHA1234567890<<<<<<<<<<<<<<<\nMENSAH<<KWAME<<<<<<<<<<<<<<<<<<<<"
 }
 ```
 
@@ -57,15 +58,16 @@ Extract data from Ghana ID Card (Ghana Card) with high accuracy using our advanc
 | `personalId` | string | Personal ID number | 1234567890 |
 | `placeOfIssue` | string | Place of issue | ACCRA |
 | `surname` | string | Surname | MENSAH |
+| `mrz` | string | Machine Readable Zone. Preserve line breaks as `\n` exactly as printed. | IDGHA1234567890...`\n`MENSAH<<KWAME... |
 
 ## Code Examples
 
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@ghana_id.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@ghana_id.jpg" \\
   -F "documentType=gh_id_card"
 ```
 
@@ -193,5 +195,5 @@ processGhanaIDCard('./ghana_id.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Ghana Documents](../../../supported-documents.md#africa) - Other Ghanaian documents

@@ -20,7 +20,7 @@ Extract data from Philippines Voter's Identification Card with high accuracy usi
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | Voter's ID image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | Voter's ID image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `ph_voters_id` |
 
 
@@ -59,9 +59,9 @@ Extract data from Philippines Voter's Identification Card with high accuracy usi
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@voters_id.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@voters_id.jpg" \\
   -F "documentType=ph_voters_id"
 ```
 
@@ -189,5 +189,5 @@ processVotersID('./voters_id.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Philippines Documents](../../../supported-documents.md#asia) - Other Philippine documents

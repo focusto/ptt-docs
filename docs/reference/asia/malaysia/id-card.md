@@ -20,7 +20,7 @@ Extract data from Malaysian ID Card (MyKad) with high accuracy using our advance
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, max 10MB) |
+| `image` | File | ✅ | ID card image file (JPG, PNG, WebP, HEIC and HEIF, max 10MB) |
 | `documentType` | String | ✅ | Must be `my_id_card` |
 
 
@@ -53,9 +53,9 @@ Extract data from Malaysian ID Card (MyKad) with high accuracy using our advance
 ### cURL
 
 ```bash
-curl -X POST "https://pictotext.io/api/v1/ocr" \
-  -H "Authorization: Bearer sk_live_123456789abcdef" \
-  -F "image=@mykad.jpg" \
+curl -X POST "https://pictotext.io/api/v1/ocr" \\
+  -H "Authorization: Bearer sk_live_123456789abcdef" \\
+  -F "image=@mykad.jpg" \\
   -F "documentType=my_id_card"
 ```
 
@@ -183,5 +183,5 @@ processMyKad('./mykad.jpg', 'YOUR_API_KEY')
 
 - [Authentication Guide](../../../authentication.md) - API key management
 - [Error Reference](../../../errors.md) - Complete error codes
-- [Rate Limits](../../../limits.md) - Usage limits and quotas
+- [Usage and Limits](../../../limits.md) - Usage limits and quotas
 - [All Malaysia Documents](../../../supported-documents.md#asia) - Other Malaysian documents
